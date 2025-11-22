@@ -1,0 +1,36 @@
+/* Styles spécifiques à `histoire.html` */
+
+/* Exemple : augmenter l'interligne pour la lecture */
+.container h2 { letter-spacing: 1px; margin-bottom: 1rem; }
+
+/* Article / texte long */
+.story-article {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: rgba(249,249,249,0.95);
+  padding: 1rem 1.5rem;
+}
+
+.chapter-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.6rem;
+  margin: 1.5rem 0 0.6rem;
+}
+
+.timeline {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.timeline-item {
+  background: rgba(255,255,255,0.02);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+  .story-article { padding: 0.5rem; }
+}

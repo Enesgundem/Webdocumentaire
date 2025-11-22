@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonaria - Embarquement</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/entree.css">
+</head>
+<body>
+    <div class="splash-screen" id="splashScreen">
+        <div class="film-grain-overlay"></div>
+        <button class="play-button" id="playButton" aria-label="Lancer le documentaire"></button>
+    </div>
+
+    <div class="space-intro-container" id="spaceIntro">
+        <canvas id="star-canvas"></canvas>
+        
+        <img src="../../assets/images/music-note-char.png" alt="Personnage Note de Musique" class="music-note-character" id="musicNoteChar">
+        
+        <div class="intro-speech-bubble" id="speechBubble">
+            <p id="speechText"></p>
+            <div class="speech-bubble-pointer" id="bubblePointer"></div>
+        </div>
+    </div>
+    
+    <audio id="introMusic" src="../../assets/audio/click-sound.mp3" loop></audio>
+
+    <script>
+        const playButton = document.getElementById('playButton');
+        const splashScreen = document.getElementById('splashScreen');
+        const spaceIntroContainer = document.getElementById('spaceIntro');
+        const introMusic = document.getElementById('introMusic');
+        const musicNoteChar = document.getElementById('musicNoteChar');
+        const speechBubble = document.getElementById('speechBubble');
+        const speechText = document.getElementById('speechText');
+        const starCanvas = document.getElementById('star-canvas');
+        const ctx = starCanvas.getContext('2d');
+    
+        // NOUVEAU : On définit des "scènes" avec le texte et les positions
+        const dialogueSteps = [
+            {
+                text: "Bienvenue dans cette aventure !",
+                charPos: { bottom: '3%', left: '19%' },
+                bubblePos: { bottom: '25%', left: '20%' },
+                bubbleAlign: 'align-left'
+            },
+            {
+                text: "Nous allons explorer les sons et les secrets des studios de musique.",
+                charPos: { top: '35%', right: '26%' },
+                bubblePos: { top: '20%', right: '25%' },
+                bubbleAlign: 'align-right'
+            },
+            {
+                text: "Chaque mur a une mélodie à raconter...",
+                charPos: { bottom: '30%', left: '50%', transform: 'translateX(-50%)' },
+                bubblePos: { bottom: '45%', left: '50%', transform: 'translateX(-50%)' },
+                bubbleAlign: 'align-center'
+            },
+            {
+                text: "Attachez vos ceintures, le voyage commence !",
+                charPos: { top: '20%', left: '15%' },
+                bubblePos: { top: '30%', left: '25%' },
+                bubbleAlign: 'align-left'
+            }
+        ];
+    
+        let stars = [];
+        const STAR_COUNT = 500;
+    
+        // Fonctions d'animation des étoiles (inchangées)
+        function initStars() { /* ... code inchangé ... */ }
+        function animateStars() { /* ... code inchangé ... */ }
+        // --- Collez ici les fonctions initStars() et animateStars() de votre version précédente ---
+        // Pour être sûr, les voici à nouveau :
+        function initStars() {
+            starCanvas.width = window.innerWidth;
+            starCanvas.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < STAR_COUNT; i++) {
+                stars.push({
+                    x: Math.random() * starCanvas.width - starCanvas.width / 2,
+                    y: Math.random() * starCanvas.height - starCanvas.height / 2,
+                    z: Math.random() * starCanvas.width
+                });
+            }
+        }
+        function animateStars() {
+            ctx.fillStyle = '#101123';
+            ctx.fillRect(0, 0, starCanvas.width, starCanvas.height);
+            ctx.save();
+            ctx.translate(starCanvas.width / 2, starCanvas.height / 2);
+            stars.forEach(star => {
+                star.z -= 2;
+                if (star.z <= 0) { star.z = starCanvas.width; }
+                const k = 128 / star.z;
+                const px = star.x * k;
+                const py = star.y * k;
+                const size = (1 - star.z / starCanvas.width) * 4;
+                const shade = parseInt((1 - star.z / starCanvas.width) * 255);
+                ctx.fillStyle = `rgb(${shade},${shade},${shade})`;
+                ctx.fillRect(px, py, size, size);
+            });
+            ctx.restore();
+            requestAnimationFrame(animateStars);
+        }
+        // --- Fin des fonctions à coller ---
+    
+
+        // Fonction de narration MODIFIÉE pour la téléportation
+        function runTextSequence() {
+            let currentIndex = 0;
+    
+            function typeWriter(text, i, cb) {
+                if (i < text.length) {
+                    speechText.innerHTML = text.substring(0, i + 1) + '<span class="cursor">_</span>';
+                    setTimeout(() => typeWriter(text, i + 1, cb), 20); // Vitesse de frappe
+                } else {
+                    speechText.innerHTML = text + '<span class="cursor hidden">_</span>';
+                    cb();
+                }
+            }
+    
+            function showNextScene() {
+                if (currentIndex >= dialogueSteps.length) {
+                    goToSite();
+                    return;
+                }
+    
+                const scene = dialogueSteps[currentIndex];
+    
+                // Applique les nouvelles positions
+                Object.assign(musicNoteChar.style, { top: '', right: '', bottom: '', left: '', transform: '' }, scene.charPos);
+                Object.assign(speechBubble.style, { top: '', right: '', bottom: '', left: '', transform: '' }, scene.bubblePos);
+                
+                // Applique l'alignement de la bulle
+                speechBubble.className = 'intro-speech-bubble'; // Reset
+                speechBubble.classList.add(scene.bubbleAlign);
+    
+                // Fait apparaître les éléments
+                musicNoteChar.classList.add('visible');
+                speechBubble.classList.add('visible');
+                
+                speechText.innerHTML = '';
+                typeWriter(scene.text, 0, () => {
+                    // Attend après la fin de la phrase
+                    setTimeout(() => {
+                        // Fait disparaître les éléments
+                        musicNoteChar.classList.remove('visible');
+                        speechBubble.classList.remove('visible');
+    
+                        // Attend la fin de la transition de disparition avant de passer à la suite
+                        setTimeout(() => {
+                            currentIndex++;
+                            showNextScene();
+                        }, 500); // Durée de la transition CSS de disparition
+                    }, 3000); // Temps de pause avant de disparaître
+                });
+            }
+            showNextScene();
+        }
+    
+        // Fonction de transition (inchangée)
+        function goToSite() { /* ... code inchangé ... */ }
+        // --- Collez ici la fonction goToSite() de votre version précédente ---
+        function goToSite() {
+            spaceIntroContainer.classList.add('fade-out');
+            let fadeAudio = setInterval(() => {
+                if (introMusic.volume > 0.05) { introMusic.volume -= 0.05; } 
+                else { clearInterval(fadeAudio); }
+            }, 100);
+            setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+        }
+        // --- Fin de la fonction à coller ---
+    
+        // Gestion du clic (inchangée)
+        playButton.addEventListener('click', () => { /* ... code inchangé ... */ });
+        // --- Collez ici la fonction playButton.addEventListener de votre version précédente ---
+        playButton.addEventListener('click', () => {
+            introMusic.volume = 0.7;
+            introMusic.play().catch(e => console.error("La lecture auto a été bloquée."));
+            splashScreen.classList.add('fade-out');
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                spaceIntroContainer.style.opacity = 1;
+                initStars();
+                animateStars();
+                runTextSequence();
+            }, 1000);
+        });
+        // --- Fin de la fonction à coller ---
+        
+        window.addEventListener('resize', initStars);
+    </script>
+
+    
+</body>
+</html>

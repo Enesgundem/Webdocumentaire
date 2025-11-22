@@ -1,0 +1,16 @@
+/* Styles spécifiques à `interview.html` */
+
+/* Mise en page des interviews */
+.interview-section { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+.interview-quote { font-style: italic; font-size: 1.05rem; color: rgba(249,249,249,0.95); border-left: 3px solid rgba(118,76,153,0.9); padding-left: 1rem; margin: 1rem 0; }
+
+.speaker-card { display:flex; gap:1rem; align-items:center; background: rgba(255,255,255,0.02); padding: 0.75rem; border-radius: 10px; }
+.speaker-avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; }
+.speaker-meta { font-size: 0.95rem; color: rgba(249,249,249,0.9); }
+
+/* Audio excerpt list */
+.interview-audio-list { display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+.interview-audio-item { display:flex; justify-content:space-between; align-items:center; padding:0.6rem; background: rgba(255,255,255,0.02); border-radius:8px; }
+
+@media (max-width: 700px) { .speaker-card { flex-direction:row; } }
