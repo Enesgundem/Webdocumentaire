@@ -1,16 +1,123 @@
 /* Styles spécifiques à `galerie.html` */
 
-/* Ajustements de la grille et lightbox pour la galerie */
-.gallery-grid { gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-.gallery-item img { border-radius: 6px; transition: transform 0.35s ease, box-shadow 0.35s ease; }
-.gallery-item:hover img { transform: scale(1.05); box-shadow: 0 8px 22px rgba(0,0,0,0.6); }
+/* En-tête de la galerie */
+.gallery-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
 
-.overlay h3 { font-size: 1.05rem; letter-spacing: 0.8px; }
+.gallery-header h2 {
+    color: #7DB3E8;
+    margin-bottom: 1rem;
+}
+
+.gallery-header p {
+    color: #7DB3E8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Galerie classique - 3 colonnes */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 0.5rem 0;
+}
+
+/* Styles des items de galerie */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    background: rgba(125, 179, 232, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+    object-fit: cover;
+    display: block;
+    background: rgba(125, 179, 232, 0.2);
+    transition: opacity 0.3s ease;
+}
+
+/* Effet de survol - bordure bleue claire */
+.gallery-item:hover {
+    border-color: #7DB3E8;
+}
+
+.gallery-item:hover img {
+    opacity: 0.9;
+}
+
+/* Si l'image ne charge pas, afficher le fond bleu */
+.gallery-item img[src=""],
+.gallery-item img:not([src]) {
+    background: rgba(125, 179, 232, 0.3);
+    min-height: 250px;
+}
+
+/* Légendes sous les images */
+.gallery-caption {
+    margin-top: 0.75rem;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #7DB3E8;
+    text-align: center;
+    opacity: 1;
+    line-height: 1.4;
+    font-style: normal;
+    letter-spacing: 0.2px;
+}
 
 /* Lightbox overrides spécifiques à la galerie */
-.lightbox-content { max-width: 95vw; max-height: 90vh; }
-.lightbox-img { border-radius: 6px; }
+.lightbox-content {
+    max-width: 70vw;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-img {
+    border-radius: 6px;
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+}
+
+.lightbox-caption {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: #7DB3E8;
+    text-align: center;
+    max-width: 100%;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
 
 @media (max-width: 600px) {
-  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .gallery-caption {
+        font-size: 0.85rem;
+    }
 }
