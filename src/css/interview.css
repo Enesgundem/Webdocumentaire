@@ -1,6 +1,75 @@
 /* Styles spécifiques à `interview.html` */
 
-/* Mise en page des interviews */
+/* En-tête de la page interview */
+.interview-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.interview-header h2 {
+    margin-bottom: 1.5rem;
+}
+
+.interview-header p {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+/* Contenu principal avec vidéo et texte */
+.interview-content {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
+    margin-top: 3rem;
+}
+
+/* Conteneur vidéo */
+.video-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    min-height: 500px;
+}
+
+.youtube-video {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border-radius: 4px;
+}
+
+/* Section texte de l'interview */
+.interview-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+    min-height: 500px;
+    justify-content: flex-start;
+}
+
+.interview-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.interview-text p {
+    text-align: left;
+    max-width: 100%;
+    line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .interview-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Styles pour les autres éléments (conservés pour compatibilité) */
 .interview-section { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
 
 .interview-quote { font-style: italic; font-size: 1.05rem; color: rgba(249,249,249,0.95); border-left: 3px solid rgba(118,76,153,0.9); padding-left: 1rem; margin: 1rem 0; }
@@ -9,7 +78,6 @@
 .speaker-avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; }
 .speaker-meta { font-size: 0.95rem; color: rgba(249,249,249,0.9); }
 
-/* Audio excerpt list */
 .interview-audio-list { display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem; }
 .interview-audio-item { display:flex; justify-content:space-between; align-items:center; padding:0.6rem; background: rgba(255,255,255,0.02); border-radius:8px; }
 
