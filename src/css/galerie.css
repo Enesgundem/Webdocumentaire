@@ -7,12 +7,13 @@
 }
 
 .gallery-header h2 {
-    color: #7DB3E8;
+    color: #ffffff;
     margin-bottom: 1rem;
+    margin-top: 65px;
 }
 
 .gallery-header p {
-    color: #7DB3E8;
+    color: #ffffff;
     max-width: 800px;
     margin: 0 auto;
 }

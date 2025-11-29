@@ -67,4 +67,50 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- 4. Gestion des articles secondaires (boutons) ---
+    const articleButtons = document.querySelectorAll('.article-btn');
+    const articleTemplates = document.querySelectorAll('.article-template');
+    const articleDisplayArea = document.getElementById('article-content');
+    let currentOpenArticle = null;
+
+    if (articleButtons.length > 0 && articleDisplayArea) {
+        articleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const articleId = button.getAttribute('data-article');
+                const articleTemplate = document.querySelector(`.article-template[data-article="${articleId}"]`);
+
+                // Si on clique sur le même article, on le ferme
+                if (currentOpenArticle === articleId) {
+                    articleDisplayArea.innerHTML = '';
+                    articleDisplayArea.style.display = 'none';
+                    button.classList.remove('active');
+                    currentOpenArticle = null;
+                    return;
+                }
+
+                // Fermer l'article précédent si ouvert
+                if (currentOpenArticle) {
+                    const prevButton = document.querySelector(`.article-btn[data-article="${currentOpenArticle}"]`);
+                    if (prevButton) prevButton.classList.remove('active');
+                }
+
+                // Ouvrir le nouvel article
+                if (articleTemplate) {
+                    articleDisplayArea.innerHTML = articleTemplate.innerHTML;
+                    articleDisplayArea.style.display = 'block';
+                    button.classList.add('active');
+                    currentOpenArticle = articleId;
+
+                    // Scroll vers l'article ouvert avec un petit délai pour l'animation
+                    setTimeout(() => {
+                        articleDisplayArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            });
+        });
+    }
+
+
 });
+
