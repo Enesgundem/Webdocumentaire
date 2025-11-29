@@ -35,7 +35,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 3. Galerie Photo Interactive (Lightbox) ---
+    // --- 3. Carrousel de galerie ---
+    const carousel = document.querySelector('.gallery-carousel');
+    if (carousel) {
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const prevButton = document.querySelector('.carousel-arrow-left');
+        const nextButton = document.querySelector('.carousel-arrow-right');
+        let currentIndex = 0;
+
+        const showSlide = (index) => {
+            galleryItems.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+            currentIndex = index;
+        };
+
+        const nextSlide = () => {
+            const nextIndex = (currentIndex + 1) % galleryItems.length;
+            showSlide(nextIndex);
+        };
+
+        const prevSlide = () => {
+            const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            showSlide(prevIndex);
+        };
+
+        // Afficher la première image au chargement
+        if (galleryItems.length > 0) {
+            showSlide(0);
+        }
+
+        // Navigation avec les flèches
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+
+        // Navigation au clavier
+        document.addEventListener('keydown', (e) => {
+            if (carousel && carousel.offsetParent !== null) {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                }
+            }
+        });
+    }
+
+    // --- 4. Galerie Photo Interactive (Lightbox) ---
     const galleryItems = document.querySelectorAll('.gallery-item');
     const lightbox = document.querySelector('.lightbox');
     const lightboxImg = document.querySelector('.lightbox-img');
@@ -44,14 +94,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (galleryItems.length > 0 && lightbox) {
         galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const imgSrc = item.querySelector('img').getAttribute('src');
-                const caption = item.querySelector('.gallery-caption')?.textContent || '';
-                lightboxImg.setAttribute('src', imgSrc);
-                if (lightboxCaption) {
-                    lightboxCaption.textContent = caption;
+            item.addEventListener('click', (e) => {
+                // Ne pas ouvrir le lightbox si on clique sur les flèches
+                if (e.target.closest('.carousel-arrow')) {
+                    return;
                 }
-                lightbox.classList.add('show');
+                const imgSrc = item.querySelector('img')?.getAttribute('src');
+                const caption = item.querySelector('.gallery-caption')?.textContent || '';
+                if (imgSrc) {
+                    lightboxImg.setAttribute('src', imgSrc);
+                    if (lightboxCaption) {
+                        lightboxCaption.textContent = caption;
+                    }
+                    lightbox.classList.add('show');
+                }
             });
         });
 
@@ -59,7 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
             lightbox.classList.remove('show');
         }
 
-        lightboxClose.addEventListener('click', closeLightbox);
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', closeLightbox);
+        }
         // Fermer aussi en cliquant sur le fond
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
@@ -67,50 +125,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // --- 4. Gestion des articles secondaires (boutons) ---
-    const articleButtons = document.querySelectorAll('.article-btn');
-    const articleTemplates = document.querySelectorAll('.article-template');
-    const articleDisplayArea = document.getElementById('article-content');
-    let currentOpenArticle = null;
-
-    if (articleButtons.length > 0 && articleDisplayArea) {
-        articleButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const articleId = button.getAttribute('data-article');
-                const articleTemplate = document.querySelector(`.article-template[data-article="${articleId}"]`);
-
-                // Si on clique sur le même article, on le ferme
-                if (currentOpenArticle === articleId) {
-                    articleDisplayArea.innerHTML = '';
-                    articleDisplayArea.style.display = 'none';
-                    button.classList.remove('active');
-                    currentOpenArticle = null;
-                    return;
-                }
-
-                // Fermer l'article précédent si ouvert
-                if (currentOpenArticle) {
-                    const prevButton = document.querySelector(`.article-btn[data-article="${currentOpenArticle}"]`);
-                    if (prevButton) prevButton.classList.remove('active');
-                }
-
-                // Ouvrir le nouvel article
-                if (articleTemplate) {
-                    articleDisplayArea.innerHTML = articleTemplate.innerHTML;
-                    articleDisplayArea.style.display = 'block';
-                    button.classList.add('active');
-                    currentOpenArticle = articleId;
-
-                    // Scroll vers l'article ouvert avec un petit délai pour l'animation
-                    setTimeout(() => {
-                        articleDisplayArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 100);
-                }
-            });
-        });
-    }
-
-
 });
-
