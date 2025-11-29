@@ -1,0 +1,206 @@
+/* Styles spécifiques à `galerie.html` */
+
+
+/* En-tête de la galerie */
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.gallery-header h2 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    margin-top: 58px;
+}
+
+.gallery-header p {
+    color: #ffffff;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+/* Carrousel de galerie */
+
+.gallery-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    min-height: 70vh;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.gallery-item.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+    position: relative;
+}
+
+.gallery-item img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    display: block;
+    background: transparent;
+}
+
+
+/* Flèches de navigation - transparentes et stylées */
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 4rem;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+    line-height: 1;
+    padding: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-weight: 300;
+}
+
+.carousel-arrow:hover {
+    color: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.2);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-arrow-left {
+    left: 2rem;
+}
+
+.carousel-arrow-right {
+    right: 2rem;
+}
+
+
+/* Légendes sous les images - en blanc */
+
+.gallery-caption {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    color: #FFFFFF;
+    text-align: center;
+    opacity: 1;
+    line-height: 1.6;
+    font-style: normal;
+    letter-spacing: 0.3px;
+    max-width: 800px;
+}
+
+
+/* Lightbox overrides spécifiques à la galerie */
+
+.lightbox-content {
+    max-width: 70vw;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-img {
+    border-radius: 6px;
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+}
+
+.lightbox-caption {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: #7DB3E8;
+    text-align: center;
+    max-width: 100%;
+    line-height: 1.5;
+}
+
+
+/* Responsive */
+
+@media (max-width: 968px) {
+    .carousel-arrow {
+        width: 60px;
+        height: 60px;
+        font-size: 3rem;
+    }
+    .carousel-arrow-left {
+        left: 1rem;
+    }
+    .carousel-arrow-right {
+        right: 1rem;
+    }
+    .gallery-item img {
+        max-height: 50vh;
+    }
+    .gallery-caption {
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .carousel-arrow {
+        width: 50px;
+        height: 50px;
+        font-size: 2.5rem;
+    }
+    .carousel-arrow-left {
+        left: 0.5rem;
+    }
+    .carousel-arrow-right {
+        right: 0.5rem;
+    }
+    .gallery-item img {
+        max-height: 40vh;
+    }
+    .gallery-caption {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        margin-top: 1rem;
+    }
+}
