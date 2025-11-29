@@ -7,75 +7,119 @@
 }
 
 .gallery-header h2 {
-    color: #ffffff;
+    color: #7DB3E8;
     margin-bottom: 1rem;
-    margin-top: 65px;
 }
 
 .gallery-header p {
-    color: #ffffff;
+    color: #7DB3E8;
     max-width: 800px;
     margin: 0 auto;
 }
 
-/* Galerie classique - 3 colonnes */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
-    padding: 0.5rem 0;
+/* Carrousel de galerie */
+.gallery-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    min-height: 70vh;
 }
 
-/* Styles des items de galerie */
-.gallery-item {
+.carousel-container {
     position: relative;
+    width: 100%;
+    max-width: 1200px;
     overflow: hidden;
-    cursor: pointer;
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    border: 2px solid transparent;
-    transition: border-color 0.3s ease;
-    background: rgba(125, 179, 232, 0.1);
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.gallery-item.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+    position: relative;
 }
 
 .gallery-item img {
     width: 100%;
+    max-width: 900px;
     height: auto;
-    min-height: 250px;
-    object-fit: cover;
+    max-height: 60vh;
+    object-fit: contain;
     display: block;
-    background: rgba(125, 179, 232, 0.2);
-    transition: opacity 0.3s ease;
+    background: transparent;
 }
 
-/* Effet de survol - bordure bleue claire */
-.gallery-item:hover {
-    border-color: #7DB3E8;
+/* Flèches de navigation - transparentes et stylées */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 4rem;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+    line-height: 1;
+    padding: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-weight: 300;
 }
 
-.gallery-item:hover img {
-    opacity: 0.9;
+.carousel-arrow:hover {
+    color: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.2);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
 }
 
-/* Si l'image ne charge pas, afficher le fond bleu */
-.gallery-item img[src=""],
-.gallery-item img:not([src]) {
-    background: rgba(125, 179, 232, 0.3);
-    min-height: 250px;
+.carousel-arrow-left {
+    left: 2rem;
 }
 
-/* Légendes sous les images */
+.carousel-arrow-right {
+    right: 2rem;
+}
+
+/* Légendes sous les images - en blanc */
 .gallery-caption {
-    margin-top: 0.75rem;
-    padding: 0.5rem 0;
-    font-size: 0.9rem;
-    color: #7DB3E8;
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    color: #FFFFFF;
     text-align: center;
     opacity: 1;
-    line-height: 1.4;
+    line-height: 1.6;
     font-style: normal;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.3px;
+    max-width: 800px;
 }
 
 /* Lightbox overrides spécifiques à la galerie */
@@ -106,19 +150,52 @@
 
 /* Responsive */
 @media (max-width: 968px) {
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+    .carousel-arrow {
+        width: 60px;
+        height: 60px;
+        font-size: 3rem;
+    }
+    
+    .carousel-arrow-left {
+        left: 1rem;
+    }
+    
+    .carousel-arrow-right {
+        right: 1rem;
+    }
+    
+    .gallery-item img {
+        max-height: 50vh;
+    }
+    
+    .gallery-caption {
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
     }
 }
 
 @media (max-width: 600px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+    .carousel-arrow {
+        width: 50px;
+        height: 50px;
+        font-size: 2.5rem;
+    }
+    
+    .carousel-arrow-left {
+        left: 0.5rem;
+    }
+    
+    .carousel-arrow-right {
+        right: 0.5rem;
+    }
+    
+    .gallery-item img {
+        max-height: 40vh;
     }
     
     .gallery-caption {
         font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        margin-top: 1rem;
     }
 }
