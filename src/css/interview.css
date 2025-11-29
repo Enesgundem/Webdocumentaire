@@ -1,0 +1,172 @@
+/* Styles spécifiques à `interview.html` */
+
+/* En-tête de la page interview */
+.interview-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.interview-header h2 {
+    margin-bottom: 1.5rem;
+    margin-top: 65px;
+}
+
+.interview-header p {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+/* Contenu principal avec vidéo et texte */
+.interview-content {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
+    margin-top: 3rem;
+}
+
+/* Conteneur vidéo */
+.video-container {
+    width: 100%;
+    position: relative;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(118, 76, 153, 0.1) 0%, rgba(16, 17, 35, 0.3) 100%);
+    border-radius: 20px;
+    border: 2px solid rgba(118, 76, 153, 0.3);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(118, 76, 153, 0.2),
+        inset 0 0 30px rgba(118, 76, 153, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.video-container::after {
+    content: '';
+    display: block;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(0deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.video-container:hover {
+    transform: translateY(-5px);
+    border-color: rgba(118, 76, 153, 0.6);
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(118, 76, 153, 0.4),
+        inset 0 0 40px rgba(118, 76, 153, 0.1);
+}
+
+.youtube-video {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border-radius: 12px;
+    display: block;
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.95) contrast(1.05);
+    background-color: rgba(0, 0, 0, 0.8);
+    object-fit: contain;
+}
+
+.video-container:hover .youtube-video {
+    transform: scale(1.02);
+    filter: brightness(1) contrast(1.1);
+}
+
+/* Section texte de l'interview */
+.interview-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: flex-start;
+}
+
+.interview-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.interview-text p {
+    text-align: left;
+    max-width: 100%;
+    line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .interview-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .video-container {
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .video-container::after {
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    }
+    
+    .youtube-video {
+        top: 15px;
+        left: 15px;
+        width: calc(100% - 30px);
+        height: calc(100% - 30px);
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .video-container {
+        padding: 10px;
+        border-radius: 12px;
+    }
+    
+    .video-container::after {
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    }
+    
+    .youtube-video {
+        top: 10px;
+        left: 10px;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        border-radius: 8px;
+    }
+}
+
+/* Styles pour les autres éléments (conservés pour compatibilité) */
+.interview-section { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+.interview-quote { font-style: italic; font-size: 1.05rem; color: rgba(249,249,249,0.95); border-left: 3px solid rgba(118,76,153,0.9); padding-left: 1rem; margin: 1rem 0; }
+
+.speaker-card { display:flex; gap:1rem; align-items:center; background: rgba(255,255,255,0.02); padding: 0.75rem; border-radius: 10px; }
+.speaker-avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; }
+.speaker-meta { font-size: 0.95rem; color: rgba(249,249,249,0.9); }
+
+.interview-audio-list { display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+.interview-audio-item { display:flex; justify-content:space-between; align-items:center; padding:0.6rem; background: rgba(255,255,255,0.02); border-radius:8px; }
+
+@media (max-width: 700px) { .speaker-card { flex-direction:row; } }

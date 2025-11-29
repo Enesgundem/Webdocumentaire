@@ -1,0 +1,124 @@
+/* ============================
+   ANIMATION ÉTOILES ET INTRO
+============================= */
+
+#star-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background: #0a0b1a;
+}
+
+
+/* ============================
+   PERSONNAGE : LOGO SONARIA
+============================= */
+
+.music-note-character {
+    margin-left: -15px;
+    width: 190px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.music-note-character.visible {
+    opacity: 1;
+}
+
+
+/* ============================
+   BULLE DE DIALOGUE
+============================= */
+
+.intro-speech-bubble {
+    position: absolute;
+    max-width: 350px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 18px 22px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Alignements personnalisés */
+
+.intro-speech-bubble.align-left {
+    text-align: left;
+}
+
+.intro-speech-bubble.align-right {
+    text-align: right;
+}
+
+.intro-speech-bubble.align-center {
+    text-align: center;
+}
+
+
+/* Visible */
+
+.intro-speech-bubble.visible {
+    opacity: 1;
+}
+
+
+/* Petit curseur clignotant */
+
+.cursor {
+    opacity: 1;
+    animation: blink 0.7s infinite;
+}
+
+.cursor.hidden {
+    opacity: 0;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+
+/* Pointe de la bulle */
+
+.speech-bubble-pointer {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 14px 10px 0 10px;
+    border-color: rgba(255, 255, 255, 0.9) transparent transparent transparent;
+    margin: 8px auto 0 auto;
+}
+
+
+/* ============================
+   TRANSITION FIN D'INTRO
+============================= */
+
+.fade-out {
+    opacity: 0 !important;
+}
+
+
+/* ============================
+   ADAPTATION MOBILE
+============================= */
+
+@media (max-width: 480px) {
+    .music-note-character {
+        width: 90px;
+    }
+    .intro-speech-bubble {
+        max-width: 250px;
+        font-size: 0.85rem;
+    }
+}
