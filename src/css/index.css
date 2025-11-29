@@ -1,0 +1,731 @@
+/* ============================
+   ANIMATION ÉTOILES ET INTRO
+============================= */
+
+#star-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background: #0a0b1a;
+}
+
+
+/* ============================
+   PERSONNAGE : LOGO SONARIA
+============================= */
+
+.music-note-character {
+    margin-left: -15px;
+    width: 190px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.music-note-character.visible {
+    opacity: 1;
+}
+
+
+/* ============================
+   BULLE DE DIALOGUE
+============================= */
+
+.intro-speech-bubble {
+    position: absolute;
+    max-width: 350px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 18px 22px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Alignements personnalisés */
+
+.intro-speech-bubble.align-left {
+    text-align: left;
+}
+
+.intro-speech-bubble.align-right {
+    text-align: right;
+}
+
+.intro-speech-bubble.align-center {
+    text-align: center;
+}
+
+
+/* Visible */
+
+.intro-speech-bubble.visible {
+    opacity: 1;
+}
+
+
+/* Petit curseur clignotant */
+
+.cursor {
+    opacity: 1;
+    animation: blink 0.7s infinite;
+}
+
+.cursor.hidden {
+    opacity: 0;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+
+/* Pointe de la bulle */
+
+.speech-bubble-pointer {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 14px 10px 0 10px;
+    border-color: rgba(255, 255, 255, 0.9) transparent transparent transparent;
+    margin: 8px auto 0 auto;
+}
+
+
+/* ============================
+   TRANSITION FIN D'INTRO
+============================= */
+
+.fade-out {
+    opacity: 0 !important;
+}
+
+
+/* ============================
+   ADAPTATION MOBILE
+============================= */
+
+@media (max-width: 480px) {
+    .music-note-character {
+        width: 90px;
+    }
+    .intro-speech-bubble {
+        max-width: 250px;
+        font-size: 0.85rem;
+    }
+}
+
+
+/* ============================
+   SECTION INFOGRAPHIES
+============================ */
+
+.infographics-section {
+    padding: 4rem 2rem;
+    background: rgba(16, 17, 35, 0.95);
+    margin-top: 4rem;
+}
+
+.infographics-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    align-items: start;
+}
+
+.infographic-card {
+    background: rgba(30, 30, 45, 0.8);
+    border: 2px solid rgba(118, 76, 153, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.infographic-title {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 1.2rem;
+    color: var(--blanc-casse, #f9f9f9);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    line-height: 1.3;
+}
+
+
+/* Graphique pays */
+
+.countries-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.country-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.country-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 140px;
+}
+
+.country-flag {
+    font-size: 1.5rem;
+}
+
+.country-name {
+    color: var(--blanc-casse, #f9f9f9);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.bar-container {
+    flex: 1;
+    height: 25px;
+    background: rgba(118, 76, 153, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bar {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(118, 76, 153, 0.8), rgba(118, 76, 153, 1));
+    border-radius: 5px;
+    transition: width 0.8s ease;
+}
+
+
+/* Carte âge */
+
+.age-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.age-icon {
+    font-size: 6rem;
+    margin: 1.5rem 0;
+    opacity: 0.9;
+}
+
+.age-value {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 3rem;
+    color: rgba(118, 76, 153, 1);
+    text-align: center;
+    margin-top: 1rem;
+}
+
+
+/* Graphique revenus */
+
+.revenue-chart {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-end;
+    height: 300px;
+    position: relative;
+}
+
+.chart-bars {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-end;
+    flex: 1;
+    height: 100%;
+}
+
+.chart-y-axis {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: rgba(249, 249, 249, 0.6);
+    height: 100%;
+    padding-bottom: 2rem;
+    min-width: 30px;
+}
+
+.revenue-bar-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.revenue-bar {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(118, 76, 153, 0.8), rgba(118, 76, 153, 1));
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    min-height: 50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 0.5rem;
+    transition: height 0.8s ease;
+}
+
+.revenue-value {
+    color: var(--blanc-casse, #f9f9f9);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.revenue-year {
+    margin-top: 0.5rem;
+    color: var(--blanc-casse, #f9f9f9);
+    font-size: 0.85rem;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1200px) {
+    .infographics-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .infographic-card {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .infographics-section {
+        padding: 2rem 1rem;
+    }
+    .infographic-card {
+        padding: 1.5rem;
+    }
+    .country-info {
+        min-width: 120px;
+    }
+    .country-name {
+        font-size: 0.8rem;
+    }
+    .age-icon {
+        font-size: 4rem;
+    }
+    .age-value {
+        font-size: 2rem;
+    }
+    .revenue-chart {
+        height: 250px;
+        gap: 1rem;
+    }
+    .chart-bars {
+        gap: 1rem;
+    }
+}
+
+
+/* ============================
+   SECTION STATISTIQUES
+============================ */
+
+.stats-section {
+    padding: 4rem 2rem;
+    background: rgba(16, 17, 35, 0.95);
+}
+
+.stats-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.stats-card {
+    background: rgba(30, 30, 45, 0.8);
+    border: 2px solid rgba(118, 76, 153, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Carte Nombre de studios */
+
+.studios-card {
+    min-height: 400px;
+}
+
+.studios-circle {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: rgba(118, 76, 153, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.studios-main-number {
+    position: absolute;
+    top: 20px;
+    font-family: "Archivo Black", sans-serif;
+    font-size: 2.5rem;
+    color: var(--blanc-casse, #f9f9f9);
+    z-index: 2;
+}
+
+.studios-hexagon {
+    width: 140px;
+    height: 140px;
+    background: var(--blanc-casse, #f9f9f9);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 40px;
+}
+
+.studios-small-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(100, 100, 100, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.studios-small-number {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 1.2rem;
+    color: var(--blanc-casse, #f9f9f9);
+}
+
+.studios-year {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 1.5rem;
+    color: rgba(16, 17, 35, 1);
+}
+
+.studios-label {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 1rem;
+    color: var(--blanc-casse, #f9f9f9);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.studios-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.legend-bar {
+    width: 40px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.legend-bar-purple {
+    background: rgba(118, 76, 153, 1);
+}
+
+.legend-bar-white {
+    background: var(--blanc-casse, #f9f9f9);
+}
+
+.legend-bar-grey {
+    background: rgba(150, 150, 150, 0.8);
+}
+
+.legend-text {
+    color: var(--blanc-casse, #f9f9f9);
+    font-size: 0.9rem;
+}
+
+
+/* Carte Croissance */
+
+.growth-card {
+    min-height: 400px;
+}
+
+.growth-arrow {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.growth-percentage-wrapper {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    align-items: flex-start;
+    line-height: 1;
+}
+
+.growth-number {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 5.5rem;
+    color: var(--blanc-casse, #f9f9f9);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+}
+
+.growth-symbol {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 4rem;
+    color: var(--blanc-casse, #f9f9f9);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    position: relative;
+    margin-left: 8px;
+    margin-top: 12px;
+    z-index: 4;
+}
+
+.growth-symbol-img {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 100px;
+}
+
+.growth-chart-arrow {
+    width: 200px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: block;
+    max-width: 100%;
+}
+
+.growth-text {
+    font-size: 0.95rem;
+    color: var(--blanc-casse, #f9f9f9);
+    text-align: center;
+    position: absolute;
+    margin-top: 150px;
+    z-index: 2;
+    max-width: 250px;
+    line-height: 1.4;
+}
+
+.growth-year {
+    font-size: 0.9rem;
+    color: rgba(249, 249, 249, 0.85);
+    position: absolute;
+    font-weight: 600;
+    margin-top: 230px;
+}
+
+
+/* Carte Marché mondial */
+
+.market-card {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.market-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(118, 76, 153, 1) 0%, rgba(147, 51, 234, 1) 50%, rgba(255, 105, 180, 1) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 0 40px rgba(118, 76, 153, 0.5), 0 0 80px rgba(255, 105, 180, 0.3), inset 0 0 40px rgba(255, 255, 255, 0.1);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.market-circle::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 70%);
+    pointer-events: none;
+}
+
+.market-label {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 1.1rem;
+    color: var(--blanc-casse, #f9f9f9);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.market-value {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 4rem;
+    color: var(--blanc-casse, #f9f9f9);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    line-height: 1;
+}
+
+
+/* Section Tarifs */
+
+.rates-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.rates-title {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 2rem;
+    color: var(--blanc-casse, #f9f9f9);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.rates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.rate-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rate-category {
+    font-size: 1rem;
+    color: var(--blanc-casse, #f9f9f9);
+    text-transform: uppercase;
+}
+
+.rate-price {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 2.5rem;
+    color: rgba(118, 76, 153, 1);
+}
+
+
+/* Responsive Stats */
+
+@media (max-width: 1200px) {
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .stats-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    .rates-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-section {
+        padding: 2rem 1rem;
+    }
+    .studios-circle {
+        width: 200px;
+        height: 200px;
+    }
+    .studios-main-number {
+        font-size: 2rem;
+    }
+    .studios-hexagon {
+        width: 110px;
+        height: 110px;
+    }
+    .growth-chart-arrow {
+        width: 160px;
+        margin-top: 0.8rem;
+    }
+    .growth-number {
+        font-size: 4rem;
+    }
+    .growth-symbol {
+        font-size: 3rem;
+    }
+    .growth-text {
+        font-size: 0.85rem;
+        max-width: 200px;
+    }
+    .market-circle {
+        width: 220px;
+        height: 220px;
+    }
+    .market-label {
+        font-size: 0.95rem;
+    }
+    .market-value {
+        font-size: 3rem;
+    }
+    .rate-price {
+        font-size: 2rem;
+    }
+}

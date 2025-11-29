@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonaria - Son</title>
+    <link rel="stylesheet" href="src/css/base.css">
+    <link rel="stylesheet" href="src/css/son.css">
+</head>
+
+<body>
+    <div class="film-grain-overlay"></div>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="entree.html" class="nav-logo-link"><img class="nav-logo-img" src="assets/images/SonariaLogo.png"
+                    alt="Logo Sonaria"></a>
+            <a href="entree.html" class="nav-logo">Sonaria</a>
+        </div>
+        <div class="nav-links">
+            <a href="entree.html">ACCUEIL</a><a href="son.html" class="active">SON</a><a
+                href="histoire.html">HISTOIRE</a><a href="interview.html">INTERVIEW</a><a
+                href="galerie.html">GALERIE</a>
+        </div>
+    </nav>
+    <main class="container son-page">
+        <section class="son-intro scroll-reveal">
+            <h2>Présentation d'un studio d'enregistrement</h2>
+            <p>Les studios d’enregistrement sont des espaces spécialement conçus pour capturer, produire et sublimer le
+                son. Équipés de matériel audio professionnel et d’une acoustique optimisée, ils offrent aux artistes,
+                ingénieurs et producteurs un environnement
+                idéal pour créer des morceaux de haute qualité. Qu’il s’agisse d’enregistrer des voix, des instruments
+                ou de mixer et masteriser un projet complet, les studios permettent de transformer une idée musicale en
+                une œuvre aboutie.</p>
+        </section>
+
+        <section class="audio-gallery">
+            <article class="audio-visual-card scroll-reveal">
+                <div class="visual">
+                    <img src="assets/images/IMG20251014170819.jpg"
+                        alt="Cabine de mixage avec console analogique et racks violets">
+                    <span class="visual-tag">Prise de son immersive</span>
+                </div>
+                <div class="audio-content">
+                    <h3>Ambiance d’un studio d'enregistrement</h3>
+                    <p>Casques refermés, lumières tamisées et machines qui ronronnent : plonge dans l’atmosphère d’une
+                        cabine pendant la préparation d’une session. Ce paysage sonore capte les voix, les retours et
+                        les nappes électroniques qui précèdent l’enregistrement.</p>
+                    <div class="audio-player">
+                        <audio id="audioPlayer" controls>
+                            <source src="assets/audio/audio-page-son.wav" type="audio/wav">
+                            Votre navigateur ne supporte pas l'élément audio.
+                        </audio>
+                    </div>
+                </div>
+            </article>
+
+            <article class="audio-visual-card scroll-reveal invert">
+                <div class="visual">
+                    <img src="assets/images/ZoskoKinay.png"
+                        alt="Artistes rap en studio autour d'un micro à condensateur">
+                    <span class="visual-tag">Session artiste</span>
+                </div>
+                <div class="audio-content">
+                    <h3>Zosko &amp; Kinay — Session guidée</h3>
+                    <p>Jeremy Paradis compose le beat original, retravaillé ensuite par MRK qui en propose un remix plus
+                        abouti. Sur cette production revisitée, Zosko et Kinay posent leurs voix avec une vraie
+                        complémentarité, chacun apportant sa couleur
+                        et son énergie. En cabine, Otis l’ingénieur du son soigne chaque détail : il équilibre les
+                        prises, harmonise les doublages, affine les nuances entre les voix et assure des transitions
+                        propres. L’ensemble donne un morceau cohérent,
+                        maîtrisé et pensé pour mettre en valeur aussi bien la production que la performance des deux
+                        artistes.</p>
+                    <div class="audio-player">
+                        <audio id="audioPlayer2" controls>
+                            <source
+                                src="assets/audio/JEREMYPARADIS X MRK X SITO X  PRESENTENT ZOSKO ET KINAY DANS CE TITRE DE LEGENDE.mp3"
+                                type="audio/wav">
+                            Votre navigateur ne supporte pas l'élément audio.
+                        </audio>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="src/js/script.js"></script>
+</body>
+
+</html>
